@@ -24,7 +24,7 @@ public class AuditRule {
     @Column(name = "type", length = 20)
     private String type = "keyword";
     
-    @Column(name = "condition", nullable = false, columnDefinition = "jsonb")
+    @Column(name = "condition", nullable = false, columnDefinition = "TEXT")
     private String condition;
     
     @Column(name = "action", length = 20)

@@ -375,7 +375,8 @@ function successMock(data = null) {
 }
 
 export function getMockResponse(url, method, data, params) {
-  let cleanUrl = url.replace('/api/v1', '')
+  // 后端API无版本前缀，直接使用URL
+  let cleanUrl = url.replace('/api', '')
 
   if (cleanUrl === '/auth/login') return loginMock(data)
   if (cleanUrl === '/auth/menus') return successMock([

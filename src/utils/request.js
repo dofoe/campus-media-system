@@ -3,7 +3,8 @@ import { ElMessage } from 'element-plus'
 import router from '@/router'
 import { getMockResponse } from '@/mock'
 
-const USE_MOCK = true
+// 是否使用Mock数据：生产环境（打包到后端）时设为false，使用真实后端API
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
 
 function parseRequestData(data) {
   if (typeof data === 'string') {
@@ -38,7 +39,7 @@ const mockAdapter = (config) => {
 }
 
 const service = axios.create({
-  baseURL: '/api/v1',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
   timeout: 30000,
   adapter: USE_MOCK ? mockAdapter : undefined
 })

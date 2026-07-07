@@ -46,7 +46,7 @@ public class Media {
     @Column(name = "md5_hash", nullable = false, length = 32)
     private String md5Hash;
     
-    @Column(name = "ai_tags", columnDefinition = "jsonb")
+    @Column(name = "ai_tags", columnDefinition = "TEXT")
     private String aiTags = "[]";
     
     @Column(name = "description", columnDefinition = "TEXT")

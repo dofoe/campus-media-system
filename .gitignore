@@ -12,6 +12,18 @@ dist
 dist-ssr
 *.local
 
+# Installer build outputs
+installer/Output/
+installer/runtime/
+installer/app.jar
+installer/CampusMediaService.exe
+installer/winsw.exe
+build/
+
+# H2 database files
+*.mv.db
+*.trace.db
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

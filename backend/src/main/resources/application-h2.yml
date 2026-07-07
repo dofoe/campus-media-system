@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/campus_media;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: false
+        globally_quoted_identifiers: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data-h2.sql
+      continue-on-error: false
+
+jwt:
+  secret: campus-media-system-jwt-secret-key-must-be-at-least-32-characters-long-for-security
+  expiration: 86400000
+
+logging:
+  level:
+    root: INFO
+    com.campus.media: INFO
+    org.springframework.security: WARN
+  file:
+    name: ./logs/app.log
