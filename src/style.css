@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.el-menu {
+  border-right: none;
+}
+
+.el-aside {
+  background-color: #0d1117;
+}
+
+.el-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.el-main {
+  background-color: #f5f7fa;
+  padding: 20px;
+}
+
+.media-card {
+  transition: all 0.3s ease;
+}
+
+.media-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.search-highlight {
+  color: #409eff;
+  font-weight: 500;
+}
+
+.el-upload-dragger {
+  border-radius: 12px;
+}
+
+.el-upload-dragger:hover {
+  border-color: #409eff;
+  background-color: #ecf5ff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.video-player {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stat-card {
+  border-radius: 12px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-top: 8px;
+}
