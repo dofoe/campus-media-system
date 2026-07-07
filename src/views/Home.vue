@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <div class="home-page" v-loading="loading">
     <div class="search-section">
       <div class="search-box-wrapper">
         <el-input 
@@ -185,12 +185,14 @@ const pagination = reactive({
 })
 
 const mediaList = ref([])
+const loading = ref(false)
 
 onMounted(() => {
   fetchMedia()
 })
 
 async function fetchMedia() {
+  loading.value = true
   try {
     const params = {
       keyword: searchKeyword.value,
@@ -204,11 +206,13 @@ async function fetchMedia() {
       params.endDate = filterForm.dateRange[1]
     }
     const res = await searchMedia(params)
-    mediaList.value = res.data.list || mockMediaList
-    pagination.total = res.data.total || mockMediaList.length
+    mediaList.value = res.data.list || []
+    pagination.total = res.data.total || 0
   } catch (error) {
-    mediaList.value = mockMediaList
-    pagination.total = mockMediaList.length
+    mediaList.value = []
+    pagination.total = 0
+  } finally {
+    loading.value = false
   }
 }
 

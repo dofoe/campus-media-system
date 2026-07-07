@@ -1,5 +1,5 @@
 <template>
-  <div class="users-page">
+  <div class="users-page" v-loading="loading">
     <div class="users-header">
       <div class="header-left">
         <el-input 
@@ -157,6 +157,7 @@ const pagination = reactive({
 })
 
 const userList = ref([])
+const loading = ref(false)
 
 const showAddDialog = ref(false)
 const showResetDialog = ref(false)
@@ -181,6 +182,7 @@ onMounted(() => {
 })
 
 async function fetchUsers() {
+  loading.value = true
   try {
     const params = {
       keyword: searchKeyword.value,
@@ -190,11 +192,13 @@ async function fetchUsers() {
       pageSize: pagination.pageSize
     }
     const res = await getUsers(params)
-    userList.value = res.data.list || mockUsers
-    pagination.total = res.data.total || mockUsers.length
+    userList.value = res.data.list || []
+    pagination.total = res.data.total || 0
   } catch (error) {
-    userList.value = mockUsers
-    pagination.total = mockUsers.length
+    userList.value = []
+    pagination.total = 0
+  } finally {
+    loading.value = false
   }
 }
 

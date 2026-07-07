@@ -1,5 +1,5 @@
 <template>
-  <div class="rules-page">
+  <div class="rules-page" v-loading="loading">
     <div class="rules-header">
       <h2 class="rules-title">规则配置</h2>
       <el-button type="primary" @click="showAddDialog = true">新增规则</el-button>
@@ -154,6 +154,7 @@ const rulesList = ref([])
 const showAddDialog = ref(false)
 const showTestDialog = ref(false)
 const editingRule = ref(null)
+const loading = ref(false)
 
 const ruleForm = reactive({
   name: '',
@@ -176,11 +177,14 @@ onMounted(() => {
 })
 
 async function fetchRules() {
+  loading.value = true
   try {
     const res = await getRules()
-    rulesList.value = res.data.list || mockRules
+    rulesList.value = res.data.list || []
   } catch (error) {
-    rulesList.value = mockRules
+    rulesList.value = []
+  } finally {
+    loading.value = false
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="media-admin-page">
+  <div class="media-admin-page" v-loading="loading">
     <div class="admin-header">
       <div class="header-left">
         <el-input 
@@ -56,9 +56,9 @@
           </el-table-column>
           <el-table-column prop="uploader" label="上传者" width="100" />
           <el-table-column prop="uploadTime" label="上传时间" width="160" />
-          <el-table-column prop="status" label="状态" width="100">
+          <el-table-column prop="auditStatus" label="状态" width="100">
             <template #default="{ row }">
-              <el-tag :type="getStatusType(row.status)">{{ getStatusText(row.status) }}</el-tag>
+              <el-tag :type="getStatusType(row.auditStatus)">{{ getStatusText(row.auditStatus) }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column label="操作" width="200">
@@ -215,6 +215,7 @@ const auditPagination = reactive({
 
 const mediaList = ref([])
 const auditList = ref([])
+const loading = ref(false)
 
 const showDetailDrawer = ref(false)
 const showMoveDialog = ref(false)
@@ -227,34 +228,40 @@ onMounted(() => {
 })
 
 async function fetchMediaList() {
+  loading.value = true
   try {
     const params = {
       keyword: searchKeyword.value,
-      categoryId: filterCategory.value,
+      category: filterCategory.value,
       pageNum: pagination.pageNum,
       pageSize: pagination.pageSize
     }
     const res = await searchMedia(params)
-    mediaList.value = res.data.list || mockMediaList
-    pagination.total = res.data.total || mockMediaList.length
+    mediaList.value = res.data.list || []
+    pagination.total = res.data.total || 0
   } catch (error) {
-    mediaList.value = mockMediaList
-    pagination.total = mockMediaList.length
+    mediaList.value = []
+    pagination.total = 0
+  } finally {
+    loading.value = false
   }
 }
 
 async function fetchAuditList() {
+  loading.value = true
   try {
     const params = {
       pageNum: auditPagination.pageNum,
       pageSize: auditPagination.pageSize
     }
     const res = await getPendingAudit(params)
-    auditList.value = res.data.list || mockAuditList
-    auditPagination.total = res.data.total || mockAuditList.length
+    auditList.value = res.data.list || []
+    auditPagination.total = res.data.total || 0
   } catch (error) {
-    auditList.value = mockAuditList
-    auditPagination.total = mockAuditList.length
+    auditList.value = []
+    auditPagination.total = 0
+  } finally {
+    loading.value = false
   }
 }
 

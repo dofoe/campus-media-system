@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-page">
+  <div class="dashboard-page" v-loading="loading">
     <div class="stats-row">
       <div class="stat-card">
         <div class="stat-icon upload-icon">
@@ -149,6 +149,7 @@ const uploadTrend = ref([])
 const categoryDist = ref([])
 const hotMedia = ref([])
 const activeDepts = ref([])
+const loading = ref(false)
 
 const pieStyle = computed(() => {
   let gradient = 'conic-gradient('
@@ -167,14 +168,15 @@ onMounted(() => {
 })
 
 async function fetchDashboard() {
+  loading.value = true
   try {
     const res = await getDashboard()
     if (res.data) {
-      stats.value = res.data.stats
-      uploadTrend.value = res.data.uploadTrend
-      categoryDist.value = res.data.categoryDist
-      hotMedia.value = res.data.hotMedia
-      activeDepts.value = res.data.activeDepts
+      stats.value = res.data.stats || stats.value
+      uploadTrend.value = res.data.uploadTrend || []
+      categoryDist.value = res.data.categoryDist || []
+      hotMedia.value = res.data.hotMedia || []
+      activeDepts.value = res.data.activeDepts || []
     }
   } catch (error) {
     stats.value = mockStats
@@ -182,6 +184,8 @@ async function fetchDashboard() {
     categoryDist.value = mockCategoryDist
     hotMedia.value = mockHotMedia
     activeDepts.value = mockActiveDepts
+  } finally {
+    loading.value = false
   }
 }
 

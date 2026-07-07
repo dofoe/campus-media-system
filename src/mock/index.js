@@ -1,42 +1,61 @@
 const mockUsers = [
-  { id: 1, username: 'admin', name: '系统管理员', dept: '宣传部', deptId: 1, role: 'admin', roleName: '超级管理员', email: 'admin@campus.edu.cn', phone: '13800138000', status: true, dataScope: 'all', createTime: '2024-01-01 00:00:00' },
-  { id: 2, username: 'dept_admin1', name: '张主任', dept: '计算机学院', deptId: 2, role: 'dept_admin', roleName: '部门管理员', email: 'zhang@campus.edu.cn', phone: '13900139001', status: true, dataScope: 'dept', createTime: '2024-02-01 10:00:00' },
-  { id: 3, username: 'dept_admin2', name: '李主任', dept: '文学院', deptId: 3, role: 'dept_admin', roleName: '部门管理员', email: 'li@campus.edu.cn', phone: '13900139002', status: true, dataScope: 'dept', createTime: '2024-02-02 11:00:00' },
-  { id: 4, username: 'user1', name: '王小明', dept: '计算机学院', deptId: 2, role: 'user', roleName: '普通用户', email: 'wang1@campus.edu.cn', phone: '13800138001', status: true, dataScope: 'self', createTime: '2024-03-01 09:00:00' },
-  { id: 5, username: 'user2', name: '赵小红', dept: '计算机学院', deptId: 2, role: 'user', roleName: '普通用户', email: 'zhao@campus.edu.cn', phone: '13800138002', status: true, dataScope: 'self', createTime: '2024-03-02 10:00:00' },
-  { id: 6, username: 'user3', name: '孙大伟', dept: '文学院', deptId: 3, role: 'user', roleName: '普通用户', email: 'sun@campus.edu.cn', phone: '13800138003', status: true, dataScope: 'self', createTime: '2024-03-03 11:00:00' },
-  { id: 7, username: 'user4', name: '周小丽', dept: '商学院', deptId: 4, role: 'user', roleName: '普通用户', email: 'zhou@campus.edu.cn', phone: '13800138004', status: true, dataScope: 'self', createTime: '2024-03-04 12:00:00' },
-  { id: 8, username: 'user5', name: '吴小军', dept: '理工学院', deptId: 5, role: 'user', roleName: '普通用户', email: 'wu@campus.edu.cn', phone: '13800138005', status: false, dataScope: 'self', createTime: '2024-03-05 13:00:00' }
+  { id: 1, username: 'admin', name: '系统管理员', dept: '宣传部', deptId: 1, role: 'admin', roleName: '超级管理员', email: 'admin@campus.edu.cn', phone: '13800138000', status: true, dataScope: 'all', createdAt: '2024-01-01 00:00:00', createTime: '2024-01-01 00:00:00' },
+  { id: 2, username: 'dept_admin1', name: '张主任', dept: '教务处', deptId: 2, role: 'dept_admin', roleName: '部门管理员', email: 'zhang@campus.edu.cn', phone: '13900139001', status: true, dataScope: 'dept', createdAt: '2024-02-01 10:00:00', createTime: '2024-02-01 10:00:00' },
+  { id: 3, username: 'dept_admin2', name: '李主任', dept: '学生处', deptId: 3, role: 'dept_admin', roleName: '部门管理员', email: 'li@campus.edu.cn', phone: '13900139002', status: true, dataScope: 'dept', createdAt: '2024-02-02 11:00:00', createTime: '2024-02-02 11:00:00' },
+  { id: 4, username: 'user1', name: '王小明', dept: '计算机学院', deptId: 4, role: 'user', roleName: '普通用户', email: 'wang1@campus.edu.cn', phone: '13800138001', status: true, dataScope: 'self', createdAt: '2024-03-01 09:00:00', createTime: '2024-03-01 09:00:00' },
+  { id: 5, username: 'user2', name: '赵小红', dept: '计算机学院', deptId: 4, role: 'user', roleName: '普通用户', email: 'zhao@campus.edu.cn', phone: '13800138002', status: true, dataScope: 'self', createdAt: '2024-03-02 10:00:00', createTime: '2024-03-02 10:00:00' },
+  { id: 6, username: 'user3', name: '孙大伟', dept: '文学院', deptId: 5, role: 'user', roleName: '普通用户', email: 'sun@campus.edu.cn', phone: '13800138003', status: true, dataScope: 'self', createdAt: '2024-03-03 11:00:00', createTime: '2024-03-03 11:00:00' },
+  { id: 7, username: 'user4', name: '周小丽', dept: '商学院', deptId: 6, role: 'user', roleName: '普通用户', email: 'zhou@campus.edu.cn', phone: '13800138004', status: true, dataScope: 'self', createdAt: '2024-03-04 12:00:00', createTime: '2024-03-04 12:00:00' },
+  { id: 8, username: 'user5', name: '吴小军', dept: '理工学院', deptId: 7, role: 'user', roleName: '普通用户', email: 'wu@campus.edu.cn', phone: '13800138005', status: false, dataScope: 'self', createdAt: '2024-03-05 13:00:00', createTime: '2024-03-05 13:00:00' }
 ]
 
-const mockMediaList = Array.from({ length: 50 }, (_, i) => ({
-  id: i + 1,
-  fileName: `素材文件_${i + 1}.${['jpg', 'png', 'mp4', 'docx', 'pdf'][i % 5]}`,
-  fileType: ['image', 'image', 'video', 'document', 'document'][i % 5],
-  fileSize: Math.floor(Math.random() * 50000000) + 100000,
-  thumbnailUrl: `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(['campus building', 'student activity', 'graduation ceremony', 'campus landscape', 'sports event'][i % 5])}&image_size=square`,
-  category: ['校园活动', '校园风景', '师生风采', '新闻资讯', '教学科研', '会议资料'][i % 6],
-  categoryId: (i % 6) + 1,
-  tags: ['校园', '宣传', ['活动', '风景', '人物', '新闻', '教学', '会议'][i % 6]],
-  aiTags: ['AI识别标签1', 'AI识别标签2', 'AI识别标签3'],
-  description: `这是第${i + 1}个素材的描述信息，包含了丰富的内容和详细的说明。`,
-  copyrightInfo: '版权所有 © 校园宣传部',
-  uploadUser: i % 3 === 0 ? 'admin' : 'user' + (i % 5),
-  uploadTime: new Date(Date.now() - i * 86400000).toISOString(),
-  downloadCount: Math.floor(Math.random() * 500),
-  usageCount: Math.floor(Math.random() * 100),
-  status: 'published',
-  auditStatus: ['approved', 'pending', 'rejected'][i % 3]
-}))
+const categories = ['校园活动', '教学教务', '荣誉表彰', '校园风景', '师生风采']
+const categoryTags = {
+  '校园活动': ['运动会', '开幕式', '活动', '学生'],
+  '教学教务': ['实验室', '科研', '教学', '教务'],
+  '荣誉表彰': ['奖学金', '表彰', '荣誉', '颁奖'],
+  '校园风景': ['樱花', '风景', '校园', '春天'],
+  '师生风采': ['人物', '风采', '师生', '合影']
+}
+
+const mockMediaList = Array.from({ length: 50 }, (_, i) => {
+  const category = categories[i % categories.length]
+  const ext = ['jpg', 'png', 'mp4', 'docx', 'pdf'][i % 5]
+  const type = ['image', 'image', 'video', 'document', 'document'][i % 5]
+  return {
+    id: i + 1,
+    fileName: `素材文件_${i + 1}.${ext}`,
+    type,
+    fileType: type,
+    fileSize: Math.floor(Math.random() * 50000000) + 100000,
+    thumbnailUrl: `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(['campus building', 'student activity', 'graduation ceremony', 'campus landscape', 'sports event'][i % 5])}&image_size=square`,
+    category,
+    categoryId: (i % categories.length) + 1,
+    tags: ['校园', '宣传', ...categoryTags[category]],
+    aiTags: ['AI识别标签1', 'AI识别标签2', 'AI识别标签3'],
+    description: `这是第${i + 1}个素材的描述信息，包含了丰富的内容和详细的说明。`,
+    copyrightInfo: '版权所有 © 校园宣传部',
+    uploader: i % 3 === 0 ? 'admin' : 'user' + (i % 5),
+    uploadUser: i % 3 === 0 ? 'admin' : 'user' + (i % 5),
+    uploadTime: new Date(Date.now() - i * 86400000).toISOString(),
+    downloadCount: Math.floor(Math.random() * 500),
+    usageCount: Math.floor(Math.random() * 100),
+    status: 'published',
+    auditStatus: ['approved', 'pending', 'rejected'][i % 3]
+  }
+})
 
 const mockDownloadLogs = Array.from({ length: 30 }, (_, i) => ({
   id: i + 1,
   mediaId: (i % 10) + 1,
   fileName: `素材文件_${(i % 10) + 1}.jpg`,
+  mediaName: `素材文件_${(i % 10) + 1}.jpg`,
   userName: ['admin', 'user1', 'user2', 'user3'][i % 4],
   dept: ['宣传部', '计算机学院', '文学院', '商学院'][i % 4],
   downloadTime: new Date(Date.now() - i * 3600000 * 2).toISOString(),
-  clientIp: `192.168.1.${i % 255}`
+  clientIp: `192.168.1.${i % 255}`,
+  ip: `192.168.1.${i % 255}`,
+  userAgent: ['Mozilla/5.0 Windows', 'Mozilla/5.0 MacOS', 'Mozilla/5.0 Android', 'Mozilla/5.0 iOS'][i % 4]
 }))
 
 const mockOperationLogs = Array.from({ length: 40 }, (_, i) => ({
@@ -48,15 +67,68 @@ const mockOperationLogs = Array.from({ length: 40 }, (_, i) => ({
   targetId: (i % 20) + 1,
   detail: '执行了' + ['登录', '上传', '下载', '编辑', '删除', '审核'][i % 6] + '操作',
   clientIp: `192.168.1.${i % 255}`,
-  createdAt: new Date(Date.now() - i * 7200000).toISOString()
+  ip: `192.168.1.${i % 255}`,
+  createdAt: new Date(Date.now() - i * 7200000).toISOString(),
+  operationTime: new Date(Date.now() - i * 7200000).toISOString()
 }))
 
 const mockRules = [
-  { id: 1, name: '敏感词过滤规则', type: 'keyword', action: 'reject', description: '过滤包含敏感词的素材', status: true, condition: { keywords: ['敏感词1', '敏感词2', '敏感词3'] }, createTime: '2024-01-15 10:00:00' },
-  { id: 2, name: '视频大小限制', type: 'file_size', action: 'reject', description: '限制视频文件最大500MB', status: true, condition: { fileType: 'video', maxSize: 524288000 }, createTime: '2024-02-01 14:00:00' },
-  { id: 3, name: '图片格式规范', type: 'file_type', action: 'reject', description: '仅允许指定格式的图片', status: true, condition: { allowedTypes: ['jpg', 'jpeg', 'png', 'gif', 'webp'] }, createTime: '2024-02-10 09:00:00' },
-  { id: 4, name: '自动分类规则', type: 'auto_category', action: 'auto', description: '根据AI标签自动分类', status: true, condition: { tagToCategory: { '校园活动': 1, '校园风景': 2, '师生风采': 3 } }, createTime: '2024-03-01 11:00:00' },
-  { id: 5, name: '版权检查规则', type: 'copyright', action: 'review', description: '疑似版权内容需要人工审核', status: false, condition: { checkKeywords: ['版权', '授权', '转载'] }, createTime: '2024-03-15 16:00:00' }
+  {
+    id: 1,
+    name: '运动会素材自动分类',
+    priority: 1,
+    logic: 'AND',
+    conditions: [
+      { field: 'tags', operator: '包含', value: '运动会' },
+      { field: 'ocrText', operator: '包含', value: '运动会' }
+    ],
+    action: '归入分类',
+    target: '校园活动',
+    enabled: true,
+    createdAt: '2024-01-15 10:00:00'
+  },
+  {
+    id: 2,
+    name: '奖学金素材自动分类',
+    priority: 2,
+    logic: 'OR',
+    conditions: [
+      { field: 'tags', operator: '包含', value: '奖学金' },
+      { field: 'ocrText', operator: '包含', value: '表彰' }
+    ],
+    action: '归入分类',
+    target: '荣誉表彰',
+    enabled: true,
+    createdAt: '2024-01-20 14:00:00'
+  },
+  {
+    id: 3,
+    name: '校园风景标签',
+    priority: 3,
+    logic: 'AND',
+    conditions: [
+      { field: 'tags', operator: '包含', value: '风景' },
+      { field: 'fileType', operator: '等于', value: 'image' }
+    ],
+    action: '添加标签',
+    target: '校园风景',
+    enabled: false,
+    createdAt: '2024-02-01 09:00:00'
+  },
+  {
+    id: 4,
+    name: '敏感内容人工审核',
+    priority: 4,
+    logic: 'OR',
+    conditions: [
+      { field: 'tags', operator: '包含', value: '敏感' },
+      { field: 'ocrText', operator: '包含', value: '敏感词' }
+    ],
+    action: '标记审核',
+    target: '人工复核',
+    enabled: true,
+    createdAt: '2024-03-01 11:00:00'
+  }
 ]
 
 const mockCategories = [
@@ -65,22 +137,29 @@ const mockCategories = [
     { id: 12, name: '毕业典礼', parentId: 1, sortOrder: 2, status: true },
     { id: 13, name: '运动会', parentId: 1, sortOrder: 3, status: true }
   ]},
-  { id: 2, name: '校园风景', parentId: null, sortOrder: 2, status: true, children: [
-    { id: 21, name: '春夏秋冬', parentId: 2, sortOrder: 1, status: true },
-    { id: 22, name: '建筑景观', parentId: 2, sortOrder: 2, status: true }
+  { id: 2, name: '教学教务', parentId: null, sortOrder: 2, status: true, children: [
+    { id: 21, name: '实验室', parentId: 2, sortOrder: 1, status: true },
+    { id: 22, name: '科研成果', parentId: 2, sortOrder: 2, status: true }
   ]},
-  { id: 3, name: '师生风采', parentId: null, sortOrder: 3, status: true },
-  { id: 4, name: '新闻资讯', parentId: null, sortOrder: 4, status: true },
-  { id: 5, name: '教学科研', parentId: null, sortOrder: 5, status: true },
-  { id: 6, name: '会议资料', parentId: null, sortOrder: 6, status: true }
+  { id: 3, name: '荣誉表彰', parentId: null, sortOrder: 3, status: true, children: [
+    { id: 31, name: '奖学金', parentId: 3, sortOrder: 1, status: true },
+    { id: 32, name: '优秀教师', parentId: 3, sortOrder: 2, status: true }
+  ]},
+  { id: 4, name: '校园风景', parentId: null, sortOrder: 4, status: true, children: [
+    { id: 41, name: '春夏秋冬', parentId: 4, sortOrder: 1, status: true },
+    { id: 42, name: '建筑景观', parentId: 4, sortOrder: 2, status: true }
+  ]},
+  { id: 5, name: '师生风采', parentId: null, sortOrder: 5, status: true }
 ]
 
 const mockDepts = [
   { id: 1, name: '宣传部', parentId: null, sortOrder: 1, status: true },
-  { id: 2, name: '计算机学院', parentId: null, sortOrder: 2, status: true },
-  { id: 3, name: '文学院', parentId: null, sortOrder: 3, status: true },
-  { id: 4, name: '商学院', parentId: null, sortOrder: 4, status: true },
-  { id: 5, name: '理工学院', parentId: null, sortOrder: 5, status: true }
+  { id: 2, name: '教务处', parentId: null, sortOrder: 2, status: true },
+  { id: 3, name: '学生处', parentId: null, sortOrder: 3, status: true },
+  { id: 4, name: '计算机学院', parentId: null, sortOrder: 4, status: true },
+  { id: 5, name: '文学院', parentId: null, sortOrder: 5, status: true },
+  { id: 6, name: '商学院', parentId: null, sortOrder: 6, status: true },
+  { id: 7, name: '理工学院', parentId: null, sortOrder: 7, status: true }
 ]
 
 const mockRoles = [
@@ -117,13 +196,15 @@ function searchMediaMock(params) {
   const pageSize = params.pageSize || 20
   const keyword = params.keyword || ''
   const category = params.category || ''
-  const fileType = params.fileType || ''
+  const categoryId = params.categoryId || ''
+  const fileType = params.fileType || params.format || ''
   const tag = params.tag || ''
 
   let filtered = mockMediaList.filter(item => {
     if (keyword && !item.fileName.includes(keyword) && !item.description.includes(keyword)) return false
     if (category && item.category !== category) return false
-    if (fileType && item.fileType !== fileType) return false
+    if (categoryId && item.categoryId !== parseInt(categoryId)) return false
+    if (fileType && item.type !== fileType && item.fileType !== fileType) return false
     if (tag && !item.tags.includes(tag) && !item.aiTags.includes(tag)) return false
     return true
   })
@@ -145,14 +226,24 @@ function getMediaDetailMock(id) {
     message: 'success',
     data: {
       ...item,
+      type: item.type || 'image',
+      url: item.thumbnailUrl,
+      fileUrl: item.thumbnailUrl,
+      uploader: item.uploader || item.uploadUser,
       storagePath: `/uploads/${item.fileType}/${item.fileName}`,
       md5Hash: 'abc123def456ghi789jkl012mno345pq',
-      fileUrl: item.thumbnailUrl,
       versions: [
         { name: '原图', size: item.fileSize, url: item.thumbnailUrl },
         { name: '中图', size: Math.floor(item.fileSize * 0.5), url: item.thumbnailUrl },
         { name: '缩略图', size: Math.floor(item.fileSize * 0.1), url: item.thumbnailUrl }
       ],
+      exif: {
+        captureTime: item.uploadTime,
+        cameraModel: 'Canon EOS R6',
+        width: 1920,
+        height: 1080,
+        gps: '30.5728° N, 104.0668° E'
+      },
       operationLogs: [
         { time: item.uploadTime, user: item.uploadUser, action: '上传', detail: '文件上传完成' },
         { time: new Date(Date.parse(item.uploadTime) + 3600000).toISOString(), user: 'ai_system', action: 'AI处理', detail: 'AI标签识别完成' },
@@ -252,7 +343,19 @@ function getRulesMock(params) {
 }
 
 function getPendingAuditMock(params) {
-  const list = mockMediaList.filter(m => m.auditStatus === 'pending')
+  const list = mockMediaList
+    .filter(m => m.auditStatus === 'pending')
+    .map((m, i) => ({
+      ...m,
+      riskLevel: ['高', '中', '低'][i % 3],
+      reason: [
+        'AI识别到疑似违规内容',
+        '低置信度识别',
+        'OCR文本不清晰',
+        '疑似版权内容',
+        '需要人工复核'
+      ][i % 5]
+    }))
   const pageNum = params.pageNum || 1
   const pageSize = params.pageSize || 20
   return {
@@ -317,26 +420,27 @@ export function getMockResponse(url, method, data, params) {
   if (cleanUrl === '/media/batch') return successMock()
 
   if (cleanUrl === '/admin/dashboard') return successMock({
-    todayUpload: 128,
-    todayDownload: 526,
-    storageUsed: '128.5 GB',
-    totalMedia: 12586,
+    stats: {
+      todayUpload: 128,
+      todayDownload: 526,
+      storageUsed: '128.5 GB',
+      totalMedia: 12586
+    },
     uploadTrend: [
-      { date: '07-01', upload: 120, download: 500 },
-      { date: '07-02', upload: 150, download: 600 },
-      { date: '07-03', upload: 100, download: 450 },
-      { date: '07-04', upload: 200, download: 800 },
-      { date: '07-05', upload: 180, download: 700 },
-      { date: '07-06', upload: 140, download: 550 },
-      { date: '07-07', upload: 128, download: 526 }
+      { label: '周一', count: 120, value: 60 },
+      { label: '周二', count: 150, value: 75 },
+      { label: '周三', count: 100, value: 50 },
+      { label: '周四', count: 200, value: 100 },
+      { label: '周五', count: 180, value: 90 },
+      { label: '周六', count: 140, value: 70 },
+      { label: '周日', count: 128, value: 64 }
     ],
     categoryDist: [
-      { name: '校园活动', count: 3520, percentage: 28 },
-      { name: '校园风景', count: 2860, percentage: 23 },
-      { name: '师生风采', count: 2450, percentage: 19 },
-      { name: '新闻资讯', count: 1890, percentage: 15 },
-      { name: '教学科研', count: 1260, percentage: 10 },
-      { name: '会议资料', count: 606, percentage: 5 }
+      { name: '校园活动', count: 3520, percentage: 28, color: '#409eff' },
+      { name: '教学教务', count: 2860, percentage: 23, color: '#67c23a' },
+      { name: '荣誉表彰', count: 2450, percentage: 19, color: '#e6a23c' },
+      { name: '校园风景', count: 1890, percentage: 15, color: '#f56c6c' },
+      { name: '师生风采', count: 1260, percentage: 10, color: '#909399' }
     ],
     typeDist: [
       { name: '图片', count: 8950, percentage: 71 },

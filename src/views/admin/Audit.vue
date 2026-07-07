@@ -1,5 +1,5 @@
 <template>
-  <div class="audit-page">
+  <div class="audit-page" v-loading="loading">
     <el-tabs v-model="activeTab" type="border-card">
       <el-tab-pane label="下载日志" name="download">
         <div class="tab-header">
@@ -149,6 +149,7 @@ const operationPagination = reactive({
 
 const downloadLogs = ref([])
 const operationLogs = ref([])
+const loading = ref(false)
 
 onMounted(() => {
   fetchDownloadLogs()
@@ -156,6 +157,7 @@ onMounted(() => {
 })
 
 async function fetchDownloadLogs() {
+  loading.value = true
   try {
     const params = {
       keyword: searchKeyword.value,
@@ -167,15 +169,18 @@ async function fetchDownloadLogs() {
       params.endDate = dateRange.value[1]
     }
     const res = await getDownloadLogs(params)
-    downloadLogs.value = res.data.list || mockDownloadLogs
-    downloadPagination.total = res.data.total || mockDownloadLogs.length
+    downloadLogs.value = res.data.list || []
+    downloadPagination.total = res.data.total || 0
   } catch (error) {
-    downloadLogs.value = mockDownloadLogs
-    downloadPagination.total = mockDownloadLogs.length
+    downloadLogs.value = []
+    downloadPagination.total = 0
+  } finally {
+    loading.value = false
   }
 }
 
 async function fetchOperationLogs() {
+  loading.value = true
   try {
     const params = {
       keyword: opSearchKeyword.value,
@@ -188,11 +193,13 @@ async function fetchOperationLogs() {
       params.endDate = opDateRange.value[1]
     }
     const res = await getOperationLogs(params)
-    operationLogs.value = res.data.list || mockOperationLogs
-    operationPagination.total = res.data.total || mockOperationLogs.length
+    operationLogs.value = res.data.list || []
+    operationPagination.total = res.data.total || 0
   } catch (error) {
-    operationLogs.value = mockOperationLogs
-    operationPagination.total = mockOperationLogs.length
+    operationLogs.value = []
+    operationPagination.total = 0
+  } finally {
+    loading.value = false
   }
 }
 

@@ -5,9 +5,42 @@ import { getMockResponse } from '@/mock'
 
 const USE_MOCK = true
 
+function parseRequestData(data) {
+  if (typeof data === 'string') {
+    try {
+      return JSON.parse(data)
+    } catch {
+      return data
+    }
+  }
+  return data
+}
+
+const mockAdapter = (config) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const mockRes = getMockResponse(
+        config.url,
+        config.method,
+        parseRequestData(config.data),
+        config.params
+      )
+      resolve({
+        data: mockRes,
+        status: 200,
+        statusText: 'OK',
+        headers: {},
+        config,
+        request: {}
+      })
+    }, 300)
+  })
+}
+
 const service = axios.create({
   baseURL: '/api/v1',
-  timeout: 30000
+  timeout: 30000,
+  adapter: USE_MOCK ? mockAdapter : undefined
 })
 
 service.interceptors.request.use(
@@ -44,24 +77,6 @@ service.interceptors.response.use(
 )
 
 export function request(config) {
-  if (USE_MOCK) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const mockRes = getMockResponse(config.url, config.method, config.data, config.params)
-        if (mockRes.code === 200) {
-          resolve(mockRes)
-        } else {
-          ElMessage.error(mockRes.message || '请求失败')
-          if (mockRes.code === 401) {
-            localStorage.removeItem('token')
-            localStorage.removeItem('userInfo')
-            router.push('/login')
-          }
-          reject(new Error(mockRes.message || '请求失败'))
-        }
-      }, 300)
-    })
-  }
   return service(config)
 }
 

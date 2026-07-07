@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-page">
+  <div class="detail-page" v-loading="loading">
     <div class="detail-header">
       <el-button icon="ArrowLeft" @click="goBack">返回</el-button>
       <h2 class="detail-title">{{ mediaInfo.fileName }}</h2>
@@ -165,6 +165,7 @@ const mediaInfo = ref({
   exif: {}
 })
 
+const loading = ref(false)
 const showEditDialog = ref(false)
 
 const editForm = reactive({
@@ -180,11 +181,14 @@ onMounted(() => {
 })
 
 async function fetchDetail(id) {
+  loading.value = true
   try {
     const res = await getMediaDetail(id)
     mediaInfo.value = res.data || mockMediaDetail
   } catch (error) {
     mediaInfo.value = mockMediaDetail
+  } finally {
+    loading.value = false
   }
 }
 

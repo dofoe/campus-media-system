@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/campus_media
+    username: admin
+    password: password
+
+logging:
+  level:
+    com.campus.media: DEBUG
