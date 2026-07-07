@@ -23,16 +23,12 @@ if errorlevel 1 (
 echo.
 
 echo [3] Maven check:
-where mvn 2>nul
+call mvn --version >nul 2>&1
 if errorlevel 1 (
-    where mvn.cmd 2>nul
-    if errorlevel 1 (
-        echo   FAIL: Maven not found
-    ) else (
-        echo   OK: mvn.cmd found
-    )
+    echo   FAIL: Maven not found or not working
 ) else (
-    echo   OK: mvn found
+    call mvn --version 2>&1 | findstr "Apache Maven"
+    echo   OK: Maven is working
 )
 echo.
 

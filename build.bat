@@ -24,21 +24,21 @@ echo.
 
 REM Step 2: Check Maven
 echo [2/5] Checking Maven...
-where mvn.cmd >nul 2>&1
+call mvn --version >nul 2>&1
 if errorlevel 1 (
-    where mvn >nul 2>&1
-    if errorlevel 1 (
-        echo ERROR: Maven not found
-        echo.
-        echo Install Maven:
-        echo   1. Download: https://maven.apache.org/download.cgi
-        echo   2. Extract to C:\apache-maven-3.9.6
-        echo   3. Add to PATH: C:\apache-maven-3.9.6\bin
-        echo   4. Restart this script
-        echo.
-        pause
-        exit /b 1
-    )
+    echo ERROR: Maven not found or not working
+    echo.
+    echo Your Maven is installed but not accessible.
+    echo.
+    echo Common fixes:
+    echo   1. Restart your computer after installing Maven
+    echo   2. Make sure PATH includes: D:\Program Files\apache-maven4.0\apache-maven-4.0.0-rc-5\bin
+    echo   3. Open a NEW Command Prompt after adding PATH
+    echo.
+    echo Current PATH: %PATH%
+    echo.
+    pause
+    exit /b 1
 )
 echo   OK
 echo.
