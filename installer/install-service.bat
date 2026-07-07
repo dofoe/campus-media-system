@@ -1,59 +1,48 @@
 @echo off
 chcp 65001 >nul
 echo ========================================
-echo   校园宣传素材智能管理系统 - 服务安装
+echo   Campus Media System - Install Service
 echo ========================================
 echo.
 
-REM 设置安装目录
 set INSTALL_DIR=%~dp0
 cd /d "%INSTALL_DIR%"
 
-REM 检查管理员权限
 net session >nul 2>&1
 if errorlevel 1 (
-    echo [错误] 请以管理员身份运行此脚本！
+    echo [ERROR] Please run as Administrator!
     pause
     exit /b 1
 )
 
-echo [1/5] 复制WinSW工具...
+echo [1/5] Copying WinSW...
 if not exist "winsw.exe" (
-    echo [错误] 缺少 winsw.exe 文件
+    echo [ERROR] winsw.exe not found
     pause
     exit /b 1
 )
 
-echo [2/5] 注册Windows服务...
+echo [2/5] Registering Windows Service...
 CampusMediaService.exe install
 
-if errorlevel 1 (
-    echo [警告] 使用兼容模式安装...
-    winsw.exe install
-)
-
-echo [3/5] 启动Windows服务...
+echo [3/5] Starting Windows Service...
 CampusMediaService.exe start
 
-if errorlevel 1 (
-    winsw.exe start
-)
-
-echo [4/5] 设置服务为自动启动...
+echo [4/5] Setting auto-start...
 sc config CampusMediaService start= auto
 
-echo [5/5] 完成安装！
+echo [5/5] Installation complete!
 echo.
 echo ========================================
-echo   服务安装完成
-echo   服务名称: CampusMediaService
-echo   访问地址: http://localhost:8080
-echo   默认账号: admin / admin
+echo   Service installed successfully
+echo   Service Name: CampusMediaService
+echo   Access: http://localhost:8080
+echo   Default: admin / admin
 echo ========================================
 echo.
-echo 常用命令:
-echo   启动服务: net start CampusMediaService
-echo   停止服务: net stop CampusMediaService
-echo   卸载服务: CampusMediaService.exe uninstall
+echo Commands:
+echo   Start:   net start CampusMediaService
+echo   Stop:    net stop CampusMediaService
+echo   Uninstall: CampusMediaService.exe uninstall
 echo.
 pause

@@ -1,50 +1,46 @@
 ========================================
-校园宣传素材智能管理系统
-Campus Media Management System v1.0.0
+Campus Media System v1.0.0
 ========================================
 
-【快速开始】
+QUICK START:
 
-1. 双击 "start.bat" 启动系统
-2. 浏览器访问: http://localhost:8080
-3. 默认账号: admin
-4. 默认密码: admin
+1. Double click "start.bat" to launch the system
+2. Open browser: http://localhost:8080
+3. Login with: admin / admin
 
-【注册为Windows服务】
+REGISTER AS WINDOWS SERVICE:
 
-1. 右键 "install-service.bat" → 以管理员身份运行
-2. 服务将自动启动并设为开机自启
+1. Right-click "install-service.bat"
+2. Select "Run as administrator"
+3. Service will auto-start on boot
 
-【卸载Windows服务】
+UNINSTALL SERVICE:
 
-1. 右键 "uninstall-service.bat" → 以管理员身份运行
+1. Right-click "uninstall-service.bat"
+2. Select "Run as administrator"
 
-【目录说明】
+DIRECTORY STRUCTURE:
+- app.jar          Application package
+- runtime/         Java runtime environment
+- data/            Database files
+- logs/            Log files
+- uploads/         Uploaded files
+- winsw.exe        Windows service wrapper
+- start.bat        Start script
+- stop.bat         Stop script
 
-- app.jar          应用程序包
-- runtime/         Java运行环境
-- data/            数据库文件
-- logs/            日志文件
-- uploads/         上传文件
-- winsw.exe        Windows服务管理工具
-- start.bat        启动脚本
-- stop.bat         停止脚本
-- install-service.bat    安装服务
-- uninstall-service.bat  卸载服务
+COMMON ISSUES:
 
-【常见问题】
+Q: Failed to start, port occupied?
+A: Stop the program using port 8080 or modify the port
 
-Q: 启动失败，提示端口被占用？
-A: 修改端口或停止占用8080端口的程序
+Q: Forgot admin password?
+A: Delete files in data folder and restart
 
-Q: 忘记管理员密码？
-A: 删除 data 目录下的数据库文件，重新启动系统
+Q: How to backup data?
+A: Copy data and uploads folders to safe location
 
-Q: 数据如何备份？
-A: 复制 data 和 uploads 目录到安全位置即可
-
-【技术支持】
-
-GitHub: https://github.com/dofoe/campus-media-system
+SUPPORT:
+https://github.com/dofoe/campus-media-system
 
 ========================================
