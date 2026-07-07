@@ -1,156 +1,143 @@
-# 快速开始指南
+# Quick Start Guide
 
-## 从GitHub下载后如何运行？
+## How to run after downloading from GitHub?
 
-GitHub仓库是**源代码仓库**，下载的zip需要先构建才能运行。
-
----
-
-## 方式1：最简单（推荐新手）
-
-### Windows用户
-
-1. 确保已安装：
-   - **JDK 21**：https://adoptium.net/（选择JDK 21，安装后重启）
-   - **Maven**：https://maven.apache.org/download.cgi（解压后配置PATH）
-   - **Node.js 18+**：https://nodejs.org/（可选，但推荐安装）
-
-2. 解压下载的zip文件
-
-3. 双击运行 `run.bat`
-
-4. 等待构建完成后，浏览器访问 http://localhost:8080
-
-5. 默认账号：`admin` / 密码：`admin`
-
-### Linux/macOS用户
-
-```bash
-# 1. 解压zip
-unzip campus-media-system-main.zip
-cd campus-media-system-main
-
-# 2. 给脚本执行权限
-chmod +x run.sh
-
-# 3. 运行
-./run.sh
-
-# 4. 浏览器访问 http://localhost:8080
-# 默认账号：admin / admin
-```
+The GitHub repo contains **source code**, not pre-built packages. You need to build it first.
 
 ---
 
-## 方式2：手动构建（开发者）
+## Step 0: Run Diagnostic First
 
-### 步骤1：安装环境
+**First, double-click `check-env.bat`** to check your environment.
 
-| 软件 | 版本 | 下载地址 |
-|------|------|---------|
+This will tell you exactly what's missing.
+
+---
+
+## Option A: Fastest (Most Users)
+
+### On Windows
+
+1. Install **JDK 21**: https://adoptium.net/
+   - Choose "JDK 21 LTS", Windows x64, .msi installer
+   - **Important**: Check "Set JAVA_HOME variable" during installation
+   - Restart your computer after installation
+
+2. Install **Apache Maven**: https://maven.apache.org/download.cgi
+   - Download "Binary zip archive" (apache-maven-3.9.6-bin.zip)
+   - Extract to `C:\apache-maven-3.9.6`
+   - Add to PATH: `C:\apache-maven-3.9.6\bin`
+   - How to add to PATH:
+     - Right-click "This PC" → Properties → Advanced system settings → Environment Variables
+     - Find "Path" under System variables → Edit → New → paste the path → OK
+   - Open a **new** Command Prompt and type `mvn -version` to verify
+
+3. Install **Node.js 18+** (optional but recommended): https://nodejs.org/
+
+4. **Double-click `build.bat`** to build
+
+5. **Double-click `start.bat`** to run
+
+6. Open browser: http://localhost:8080
+
+7. Login with: `admin` / `admin`
+
+---
+
+## Option B: Manual Build (Developers)
+
+### Step 1: Install required tools
+
+| Tool | Version | Download |
+|------|---------|----------|
 | JDK | 21+ | https://adoptium.net/ |
-| Maven | 3.8+ | https://maven.apache.org/ |
+| Maven | 3.8+ | https://maven.apache.org/download.cgi |
 | Node.js | 18+ | https://nodejs.org/ |
 
-### 步骤2：构建前端
+### Step 2: Verify installation
 
-```bash
-# Windows
-npm install
-npm run build
+Open a new Command Prompt and run:
+```cmd
+java -version
+mvn -version
+node -v
+npm -v
+```
 
-# Linux/macOS
+All should show version numbers.
+
+### Step 3: Build frontend
+
+```cmd
+cd campus-media-system
 npm install
 npm run build
 ```
 
-### 步骤3：构建后端
+### Step 4: Build backend
 
-```bash
-# Windows
-cd backend
-mvn clean package -DskipTests
-cd ..
-
-# Linux/macOS
+```cmd
 cd backend
 mvn clean package -DskipTests
 cd ..
 ```
 
-### 步骤4：启动服务
+### Step 5: Start server
 
-```bash
-# Windows
+```cmd
 java -jar backend\target\campus-media-system-1.0.0.jar
-
-# Linux/macOS
-java -jar backend/target/campus-media-system-1.0.0.jar
 ```
 
-### 步骤5：访问
+### Step 6: Access
 
-浏览器打开 http://localhost:8080
+Open browser: http://localhost:8080
 
 ---
 
-## 方式3：生成安装包（进阶）
+## Option C: Generate EXE Installer (Advanced)
 
-如果您想生成 `CampusMediaSystemSetup-1.0.0.exe` 安装包：
+To generate `CampusMediaSystemSetup-1.0.0.exe`:
 
-### Windows
+### On Windows
 
-```powershell
-# 需要额外安装 Inno Setup 6.x
+```cmd
+# Need to install Inno Setup 6.x first:
 # https://jrsoftware.org/isdl.php
 
-# 运行打包脚本
-.\build-installer.ps1
+# Then run build script
+build-installer.ps1
 
-# 安装包位置
-# installer\Output\CampusMediaSystemSetup-1.0.0.exe
-```
-
-### Linux/macOS
-
-```bash
-chmod +x build-installer.sh
-./build-installer.sh
-
-# 输出
-# installer/Output/CampusMediaSystem-Green-1.0.0.zip
-# installer/Output/CampusMediaSystem-Linux-1.0.0.tar.gz
+# Output: installer\Output\CampusMediaSystemSetup-*.exe
 ```
 
 ---
 
-## 常见问题
+## Common Problems
 
-### Q: 运行run.bat提示"未检测到Java环境"
+### Q: Double-click .bat and nothing happens?
 
-**解决**：安装JDK 21
-- 下载：https://adoptium.net/
-- 选择 JDK 21（Windows x64）
-- 安装后**重启电脑**
-- 验证：打开cmd输入 `java -version`
+A: The script likely has an error and exits immediately.
 
-### Q: 运行run.bat提示"未检测到Maven"
+**Fix**: 
+1. Open Command Prompt (type `cmd` in address bar)
+2. Type the script name manually: `build.bat`
+3. Now you can see the error message
 
-**解决**：安装Maven
-- 下载：https://maven.apache.org/download.cgi
-- 选择 Binary zip archive
-- 解压到如 `C:\Program Files\Apache\maven`
-- 配置环境变量：
-  - 新建 `MAVEN_HOME` = `C:\Program Files\Apache\maven`
-  - 编辑 `Path`，添加 `%MAVEN_HOME%\bin`
-- 验证：打开cmd输入 `mvn -version`
+### Q: "Maven not installed" even after installing?
 
-### Q: 构建很慢/卡住
+A: PATH not updated.
 
-**解决**：配置Maven国内镜像
+**Fix**:
+1. Open a **new** Command Prompt (not the old one)
+2. Type `mvn -version`
+3. If still not found, restart your computer
+4. Double-check PATH has `C:\apache-maven-3.9.6\bin`
 
-编辑 `%USERPROFILE%\.m2\settings.xml`（如不存在则创建）：
+### Q: Maven downloads are very slow?
 
+A: Configure Alibaba mirror.
+
+Create file `C:\Users\YOUR_USERNAME\.m2\settings.xml`:
 ```xml
 <?xml version="1.0"?>
 <settings>
@@ -164,36 +151,44 @@ chmod +x build-installer.sh
 </settings>
 ```
 
-### Q: 端口8080被占用
+### Q: Port 8080 is occupied?
 
-**解决**：
+A:
 ```cmd
-# 查看占用
+# Find the process
 netstat -ano | findstr :8080
 
-# 结束进程
-taskkill /F /PID <进程号>
+# Kill it (replace PID with the number from above)
+taskkill /F /PID 12345
 ```
 
-或修改 `backend\src\main\resources\application.yml`：
-```yaml
-server:
-  port: 9090  # 改用其他端口
+Or edit `backend\src\main\resources\application.yml` to use a different port.
+
+### Q: Java not found error?
+
+A: Install JDK 21 and make sure JAVA_HOME is set.
+
+**Check**:
+```cmd
+echo %JAVA_HOME%
+java -version
 ```
+
+If `%JAVA_HOME%` is empty, reinstall JDK with the "Set JAVA_HOME" option checked.
 
 ---
 
-## 访问地址
+## URLs
 
-| 项目 | 地址 |
-|------|------|
-| 系统首页 | http://localhost:8080 |
-| H2数据库控制台 | http://localhost:8080/h2-console |
-| GitHub仓库 | https://github.com/dofoe/campus-media-system |
+| Item | URL |
+|------|-----|
+| System | http://localhost:8080 |
+| H2 Console | http://localhost:8080/h2-console |
+| GitHub | https://github.com/dofoe/campus-media-system |
 
 ---
 
-## 下一步
+## Next Steps
 
-- 查看 [INSTALL_WINDOWS.md](INSTALL_WINDOWS.md) 了解完整部署方案
-- 查看 [DEPLOYMENT.md](DEPLOYMENT.md) 了解生产环境部署
+- Read [INSTALL_WINDOWS.md](INSTALL_WINDOWS.md) for full Windows deployment guide
+- Read [DEPLOYMENT.md](DEPLOYMENT.md) for production deployment
