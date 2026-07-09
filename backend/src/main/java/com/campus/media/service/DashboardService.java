@@ -40,8 +40,8 @@ public class DashboardService {
         DashboardResponse.Stats stats = new DashboardResponse.Stats();
         
         LocalDateTime todayStart = LocalDate.now().atStartOfDay();
-        stats.setTodayUpload((int) mediaRepository.countByUploadTimeAfter(todayStart));
-        stats.setTodayDownload((int) downloadLogRepository.countByDownloadTimeAfter(todayStart));
+        stats.setTodayUpload(Math.toIntExact(mediaRepository.countByUploadTimeAfter(todayStart)));
+        stats.setTodayDownload(Math.toIntExact(downloadLogRepository.countByDownloadTimeAfter(todayStart)));
         
         Long totalSize = mediaRepository.sumFileSize();
         if (totalSize != null) {
@@ -50,7 +50,7 @@ public class DashboardService {
             stats.setStorageUsed("0.0 GB");
         }
         
-        stats.setTotalMedia((int) mediaRepository.count());
+        stats.setTotalMedia(Math.toIntExact(mediaRepository.count()));
         
         return stats;
     }
