@@ -1,17 +1,11 @@
 package com.campus.media.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "download_logs")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class DownloadLog {
     
     @Id
@@ -40,4 +34,71 @@ public class DownloadLog {
     
     @Column(name = "user_agent", columnDefinition = "TEXT")
     private String userAgent;
+    
+    public DownloadLog() {
+    }
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public Long getMediaId() {
+        return mediaId;
+    }
+    
+    public void setMediaId(Long mediaId) {
+        this.mediaId = mediaId;
+    }
+    
+    public Media getMedia() {
+        return media;
+    }
+    
+    public void setMedia(Media media) {
+        this.media = media;
+    }
+    
+    public Long getUserId() {
+        return userId;
+    }
+    
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    
+    public User getUser() {
+        return user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    public LocalDateTime getDownloadTime() {
+        return downloadTime;
+    }
+    
+    public void setDownloadTime(LocalDateTime downloadTime) {
+        this.downloadTime = downloadTime;
+    }
+    
+    public String getClientIp() {
+        return clientIp;
+    }
+    
+    public void setClientIp(String clientIp) {
+        this.clientIp = clientIp;
+    }
+    
+    public String getUserAgent() {
+        return userAgent;
+    }
+    
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
 }

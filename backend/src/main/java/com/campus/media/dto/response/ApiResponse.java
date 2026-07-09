@@ -1,8 +1,5 @@
 package com.campus.media.dto.response;
 
-import lombok.Data;
-
-@Data
 public class ApiResponse<T> {
     
     private Integer code;
@@ -10,6 +7,9 @@ public class ApiResponse<T> {
     private String message;
     
     private T data;
+    
+    public ApiResponse() {
+    }
     
     public static <T> ApiResponse<T> success(T data) {
         ApiResponse<T> response = new ApiResponse<>();
@@ -41,5 +41,29 @@ public class ApiResponse<T> {
     
     public static <T> ApiResponse<T> forbidden(String message) {
         return error(403, message);
+    }
+    
+    public Integer getCode() {
+        return code;
+    }
+    
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+    
+    public String getMessage() {
+        return message;
+    }
+    
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    public T getData() {
+        return data;
+    }
+    
+    public void setData(T data) {
+        this.data = data;
     }
 }

@@ -1,9 +1,6 @@
 package com.campus.media.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -11,9 +8,6 @@ import java.time.LocalDateTime;
 @Table(name = "media_tags", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"media_id", "tag_id"})
 })
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class MediaTag {
     
     @Id
@@ -36,4 +30,55 @@ public class MediaTag {
     
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+    
+    public MediaTag() {
+    }
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public Long getMediaId() {
+        return mediaId;
+    }
+    
+    public void setMediaId(Long mediaId) {
+        this.mediaId = mediaId;
+    }
+    
+    public Media getMedia() {
+        return media;
+    }
+    
+    public void setMedia(Media media) {
+        this.media = media;
+    }
+    
+    public Long getTagId() {
+        return tagId;
+    }
+    
+    public void setTagId(Long tagId) {
+        this.tagId = tagId;
+    }
+    
+    public Tag getTag() {
+        return tag;
+    }
+    
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
+    
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+    
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
