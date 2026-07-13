@@ -11,6 +11,7 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: false
+    defer-datasource-initialization: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
@@ -22,10 +23,7 @@ spring:
       path: /h2-console
   sql:
     init:
-      mode: always
-      data-locations: classpath:data-h2.sql
-      continue-on-error: false
-      encoding: UTF-8
+      mode: never
 
 jwt:
   secret: campus-media-system-jwt-secret-key-must-be-at-least-32-characters-long-for-security
