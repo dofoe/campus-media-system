@@ -18,7 +18,7 @@ public class Role {
     @Column(name = "code", nullable = false, unique = true, length = 50)
     private String code;
     
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "VARCHAR(4000)")
     private String description;
     
     @Column(name = "data_scope", length = 20)

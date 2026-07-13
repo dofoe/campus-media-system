@@ -18,13 +18,13 @@ public class AuditRule {
     @Column(name = "type", length = 20)
     private String type = "keyword";
     
-    @Column(name = "condition", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "condition", nullable = false, columnDefinition = "VARCHAR(4000)")
     private String condition;
     
     @Column(name = "action", length = 20)
     private String action = "reject";
     
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "VARCHAR(4000)")
     private String description;
     
     @Column(name = "status")

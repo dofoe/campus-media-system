@@ -40,13 +40,13 @@ public class Media {
     @Column(name = "md5_hash", nullable = false, length = 32)
     private String md5Hash;
     
-    @Column(name = "ai_tags", columnDefinition = "TEXT")
+    @Column(name = "ai_tags", columnDefinition = "VARCHAR(4000)")
     private String aiTags = "[]";
     
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "VARCHAR(4000)")
     private String description;
     
-    @Column(name = "copyright_info", columnDefinition = "TEXT")
+    @Column(name = "copyright_info", columnDefinition = "VARCHAR(4000)")
     private String copyrightInfo;
     
     @Column(name = "usage_count")
@@ -61,7 +61,7 @@ public class Media {
     @Column(name = "audit_status", length = 20)
     private String auditStatus = "pending";
     
-    @Column(name = "audit_comment", columnDefinition = "TEXT")
+    @Column(name = "audit_comment", columnDefinition = "VARCHAR(4000)")
     private String auditComment;
     
     @Column(name = "audit_user_id")

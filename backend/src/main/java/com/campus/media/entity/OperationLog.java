@@ -28,13 +28,13 @@ public class OperationLog {
     @Column(name = "target_id")
     private Long targetId;
     
-    @Column(name = "detail", columnDefinition = "TEXT")
+    @Column(name = "detail", columnDefinition = "VARCHAR(4000)")
     private String detail;
     
     @Column(name = "client_ip", length = 50)
     private String clientIp;
     
-    @Column(name = "user_agent", columnDefinition = "TEXT")
+    @Column(name = "user_agent", columnDefinition = "VARCHAR(4000)")
     private String userAgent;
     
     @Column(name = "created_at")
