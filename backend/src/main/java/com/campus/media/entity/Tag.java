@@ -24,6 +24,9 @@ public class Tag {
     @Column(name = "count")
     private Integer count = 0;
     
+    @Column(name = "status")
+    private Boolean status = true;
+    
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
     
@@ -68,6 +71,14 @@ public class Tag {
     
     public void setCount(Integer count) {
         this.count = count;
+    }
+    
+    public Boolean getStatus() {
+        return status;
+    }
+    
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
     
     public LocalDateTime getCreatedAt() {
