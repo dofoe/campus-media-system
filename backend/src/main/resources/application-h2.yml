@@ -25,6 +25,7 @@ spring:
       mode: always
       data-locations: classpath:data-h2.sql
       continue-on-error: false
+      encoding: UTF-8
 
 jwt:
   secret: campus-media-system-jwt-secret-key-must-be-at-least-32-characters-long-for-security
